@@ -1,0 +1,16 @@
+{
+    "name": "snake/ladder",
+    "description": "snake ladder exercise",
+    "authors": [
+        {
+            "name": "arryanggaputra",
+            "email": "arryanggaputra@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "SnakeLadder\\": "src/SnakeLadder/"
+        }
+    }
+}
