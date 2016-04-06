@@ -2,6 +2,8 @@
 
 namespace SnakeLadder\Lib;
 
+use SnakeLadder\Interfaces\RandomNumberGenerator;
+
 /**
  *
  */
@@ -9,9 +11,11 @@ class Board
 {
     protected $_square;
 
+    protected $_randomNumberGenerator;
+
     const maxBoard = 100;
 
-    public function __construct(array $customSquare)
+    public function __construct(array $customSquare, RandomNumberGenerator $randomNumberGenerator)
     {
         /**
          * identify square number
@@ -34,11 +38,18 @@ class Board
          * Sort square position
          */
         ksort($this->_square);
+
+        $this->_randomNumberGenerator = $randomNumberGenerator;
     }
 
-    public static function roll()
+    public function roll()
     {
-        return rand(1, 6);
+        return $this->_randomNumberGenerator->randomize();
+    }
+
+    public function maxRollNumber()
+    {
+        return $this->_randomNumberGenerator->maxnumber();
     }
 
     public function getBoardSize()

@@ -21,8 +21,10 @@ $theSnakeLadder = [
     99 => 78,
 ];
 
-$board   = new SnakeLadder\Lib\Board($theSnakeLadder);
-$player = new SnakeLadder\Lib\Player(1, $board);
+$dice    = new SnakeLadder\Lib\Dice();
+$spinner = new SnakeLadder\Lib\Spinner();
+$board   = new SnakeLadder\Lib\Board($theSnakeLadder, $dice);
+$player  = new SnakeLadder\Lib\Player(1, $board);
 
 while ($player->getPosition() <= $board->getBoardSize()) {
     echo "<li>";
@@ -33,10 +35,9 @@ while ($player->getPosition() <= $board->getBoardSize()) {
     $dice = $board->roll();
 
     /**
-     * if the dice is 6
      * roll the dice again
      */
-    if ($dice == 6) {
+    if ($dice == $board->maxRollNumber()) {
         $dice += $board->roll();
     }
     echo " - Dice : " . $dice . '<br/>';
