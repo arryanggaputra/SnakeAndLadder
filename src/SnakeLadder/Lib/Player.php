@@ -27,7 +27,7 @@ class Player
         echo $this->name . ' in ' . $this->_boardPosition;
     }
 
-    public function getPosition()
+    public function position()
     {
         return $this->_boardPosition;
     }

@@ -22,11 +22,11 @@ $theSnakeLadder = [
 ];
 
 $dice    = new SnakeLadder\Lib\Dice();
-$spinner = new SnakeLadder\Lib\Spinner();
+// $spinner = new SnakeLadder\Lib\Spinner();
 $board   = new SnakeLadder\Lib\Board($theSnakeLadder, $dice);
 $player  = new SnakeLadder\Lib\Player(1, $board);
 
-while ($player->getPosition() <= $board->getBoardSize()) {
+while ($player->position() <= $board->getBoardSize()) {
     echo "<li>";
 
     /**
@@ -44,7 +44,7 @@ while ($player->getPosition() <= $board->getBoardSize()) {
     $player->showPosition();
     echo " - Dice : " . $dice . '<br/>';
 
-    $step = $dice + $player->getPosition();
+    $step = $dice + $player->position();
 
     /**
      * Move player to the board
