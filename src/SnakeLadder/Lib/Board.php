@@ -57,11 +57,14 @@ class Board
         return self::maxBoard;
     }
 
-    public function movePlayer($playerPosition)
+    public function movePlayer($player, $step)
     {
-        if ($playerPosition != $this->_square[$playerPosition]) {
-            return $this->_square[$playerPosition];
+        $player->setPosition($step);
+        if ($step != $this->_square[$step]) {
+            $step = $this->_square[$step];
         }
-        return $playerPosition;
+        if (self::maxBoard >= $player->_boardPosition) {
+            $player->setPosition($step);
+        }
     }
 }

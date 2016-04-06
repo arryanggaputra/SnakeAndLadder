@@ -28,7 +28,7 @@ $player  = new SnakeLadder\Lib\Player(1, $board);
 
 while ($player->getPosition() <= $board->getBoardSize()) {
     echo "<li>";
-    $player->showPosition();
+
     /**
      * Roll the dice on Board
      */
@@ -40,21 +40,17 @@ while ($player->getPosition() <= $board->getBoardSize()) {
     if ($dice == $board->maxRollNumber()) {
         $dice += $board->roll();
     }
+
+    $player->showPosition();
     echo " - Dice : " . $dice . '<br/>';
 
-    $dice = $dice + $player->getPosition();
-
-    /**
-     * Prepare player position by Dice result
-     */
-    $player->setPosition($dice);
+    $step = $dice + $player->getPosition();
 
     /**
      * Move player to the board
      * and get the result
      */
-    $resultBoard = $board->movePlayer($player->getPosition());
-    $player->setPosition($resultBoard);
+    $board->movePlayer($player, $step);
 
     echo "</li>";
 }

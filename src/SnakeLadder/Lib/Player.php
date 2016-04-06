@@ -11,20 +11,15 @@ class Player
 {
     public $name;
 
-    protected $_boardSize;
-
-    public function __construct($id, Board $board)
+    public function __construct($id)
     {
         $this->name           = 'Player ' . $id;
         $this->_boardPosition = 0;
-        $this->_boardSize     = $board->getBoardSize();
     }
 
     public function setPosition($position)
     {
-        if ($this->_boardSize >= $this->_boardPosition ) {
-            $this->_boardPosition = $position;
-        }
+        $this->_boardPosition = $position;
     }
 
     public function showPosition()
