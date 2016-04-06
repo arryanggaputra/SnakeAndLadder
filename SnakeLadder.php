@@ -22,7 +22,9 @@ $theSnakeLadder = [
 ];
 
 $dice = new SnakeLadder\Lib\Dice();
-$board   = new SnakeLadder\Lib\Board($theSnakeLadder, $dice);
+$digitalRandom = new SnakeLadder\Lib\DigitalRandomizer();
+
+$board   = new SnakeLadder\Lib\Board($theSnakeLadder, $digitalRandom);
 $player = new SnakeLadder\Lib\Player(1, $board);
 
 while ($player->getPosition() <= $board->getBoardSize()) {
