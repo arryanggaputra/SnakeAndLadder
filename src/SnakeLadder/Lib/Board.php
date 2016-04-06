@@ -13,7 +13,7 @@ class Board
 
     const maxBoard = 100;
 
-    public function __construct(array $customSquare, RandomNumberGenerator $RandomNumberGenerator)
+    public function __construct(array $customSquare, RandomNumberGenerator $randomNumberGenerator)
     {
         /**
          * identify square number
