@@ -59,11 +59,15 @@ class Board
 
     public function movePlayer($player, $step)
     {
-        $step        = $step + $player->position();
-        $squareValue = (isset($this->square[$step])) ? $this->square[$step] : $step;
-        $step        = ($step !== $squareValue) ? $squareValue : $step;
-        if (self::maxBoard >= $player->position()) {
-            $player->setPosition($squareValue);
+        $step   = $step + $player->position();
+        $status = 'neutral';
+        if (isset($this->square[$step]) && $this->square[$step] !== $step) {
+            $status = ($this->square[$step] < $step) ? 'snake' : 'ladder';
+            $step   = $this->square[$step];
         }
+        if (self::maxBoard >= $player->position()) {
+            $player->setPosition($step);
+        }
+        return $status;
     }
 }
