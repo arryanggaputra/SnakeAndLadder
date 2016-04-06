@@ -2,12 +2,16 @@
 
 namespace SnakeLadder\Lib;
 
+use SnakeLadder\Lib\Dice;
+
 /**
  *
  */
-class Board
+class Board extends Dice
 {
-    protected $square;
+    protected $_square;
+
+    const maxBoard = 100;
 
     public function __construct(array $customSquare)
     {
@@ -19,30 +23,30 @@ class Board
          * Default square has no LADDER and SNAKE
          * @var integer
          */
-        for ($i = 1; $i <= 100; $i++) {
-            $this->square[$i] = $i;
+        for ($i = 1; $i <= self::maxBoard; $i++) {
+            $this->_square[$i] = $i;
         }
 
         /**
          * Replace default square
          */
-        $this->square = $customSquare + $this->square;
+        $this->_square = $customSquare + $this->_square;
 
         /**
          * Sort square position
          */
-        ksort($this->square);
+        ksort($this->_square);
     }
 
-    public function show()
+    public function getBoardSize()
     {
-        return $this->square;
+        return self::maxBoard;
     }
 
     public function movePlayer($playerPosition)
     {
-        if ($playerPosition != $this->square[$playerPosition]) {
-            return $this->square[$playerPosition];
+        if ($playerPosition != $this->_square[$playerPosition]) {
+            return $this->_square[$playerPosition];
         }
         return $playerPosition;
     }

@@ -22,44 +22,38 @@ $theSnakeLadder = [
 ];
 
 $board   = new SnakeLadder\Lib\Board($theSnakeLadder);
-$players = [
-    'player1' => new SnakeLadder\Lib\Player(1),
-    'player2' => new SnakeLadder\Lib\Player(2),
-];
-echo "<table width='100%'>";
-foreach ($players as $player) {
-    $playerPosition = $player->getPosition();
-    echo "<td valign='top'>";
-    while ($playerPosition <= 100) {
-        echo "<li>";
-        /**
-         * Player roll the dice
-         */
-        $dice = $player->roll();
-        echo "Dice : " . $dice . '<br/>';
-        $dice = $dice + $playerPosition;
+$player = new SnakeLadder\Lib\Player(1, $board);
 
-        /**
-         * Initiate player position by Dice result
-         */
-        $player->setPosition($dice);
-        $playerPosition = $player->getPosition();
+while ($player->getPosition() <= $board->getBoardSize()) {
+    echo "<li>";
+    $player->showPosition();
+    /**
+     * Roll the dice on Board
+     */
+    $dice = $board->roll();
 
-        /**
-         * Move player to the board
-         * and get the result
-         */
-        $resultBoard = $board->movePlayer($playerPosition);
-
-        if ($playerPosition < 100) {
-            $player->setPosition($resultBoard);
-        }
-
-        $playerPosition = $player->getPosition();
-        $player->showPosition();
-        echo "</li>";
+    /**
+     * if the dice is 6
+     * roll the dice again
+     */
+    if ($dice == 6) {
+        $dice += $board->roll();
     }
-    echo "</td>";
+    echo " - Dice : " . $dice . '<br/>';
 
+    $dice = $dice + $player->getPosition();
+
+    /**
+     * Prepare player position by Dice result
+     */
+    $player->setPosition($dice);
+
+    /**
+     * Move player to the board
+     * and get the result
+     */
+    $resultBoard = $board->movePlayer($player->getPosition());
+    $player->setPosition($resultBoard);
+
+    echo "</li>";
 }
-echo "</table>";

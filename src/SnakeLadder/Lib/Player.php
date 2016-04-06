@@ -2,35 +2,39 @@
 
 namespace SnakeLadder\Lib;
 
-use SnakeLadder\Lib\Dice;
+use SnakeLadder\Lib\Board;
 
 /**
  *
  */
-class Player extends Dice
+class Player
 {
     public $name;
 
-    private $board_position;
+    protected $_boardSize;
 
-    public function __construct($id)
+    public function __construct($id, Board $board)
     {
         $this->name           = 'Player ' . $id;
-        $this->board_position = 0;
+        $this->_boardPosition = 0;
+        $this->_boardSize     = $board->getBoardSize();
     }
 
     public function setPosition($position)
     {
-        $this->board_position = $position;
+        if ($this->_boardSize >= $this->_boardPosition ) {
+            $this->_boardPosition = $position;
+        }
     }
 
     public function showPosition()
     {
-        echo $this->name . ' in ' . $this->board_position;
+        echo $this->name . ' in ' . $this->_boardPosition;
     }
 
     public function getPosition()
     {
-        return $this->board_position;
+        return $this->_boardPosition;
     }
+
 }
