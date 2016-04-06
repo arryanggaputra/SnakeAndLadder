@@ -11,25 +11,27 @@ class Player
 {
     public $name;
 
+    protected $boardPosition;
+
     public function __construct($id)
     {
         $this->name           = 'Player ' . $id;
-        $this->_boardPosition = 0;
+        $this->boardPosition = 0;
     }
 
     public function setPosition($position)
     {
-        $this->_boardPosition = $position;
+        $this->boardPosition = $position;
     }
 
     public function showPosition()
     {
-        echo $this->name . ' in ' . $this->_boardPosition;
+        echo $this->name . ' in ' . $this->boardPosition;
     }
 
     public function position()
     {
-        return $this->_boardPosition;
+        return $this->boardPosition;
     }
 
 }

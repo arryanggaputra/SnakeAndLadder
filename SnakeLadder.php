@@ -32,19 +32,17 @@ while ($player->position() <= $board->getBoardSize()) {
     /**
      * Roll the dice on Board
      */
-    $dice = $board->roll();
+    $step = $board->roll();
 
     /**
      * roll the dice again
      */
-    if ($dice == $board->maxRollNumber()) {
-        $dice += $board->roll();
+    if ($step == $board->maxRollNumber()) {
+        $step += $board->roll();
     }
 
     $player->showPosition();
-    echo " - Dice : " . $dice . '<br/>';
-
-    $step = $dice + $player->position();
+    echo " - Dice : " . $step . '<br/>';
 
     /**
      * Move player to the board

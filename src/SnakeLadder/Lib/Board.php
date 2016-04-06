@@ -9,9 +9,9 @@ use SnakeLadder\Interfaces\RandomNumberGenerator;
  */
 class Board
 {
-    protected $_square;
+    protected $square;
 
-    protected $_randomNumberGenerator;
+    protected $randomNumberGenerator;
 
     const maxBoard = 100;
 
@@ -26,30 +26,30 @@ class Board
          * @var integer
          */
         for ($i = 1; $i <= self::maxBoard; $i++) {
-            $this->_square[$i] = $i;
+            $this->square[$i] = $i;
         }
 
         /**
          * Replace default square
          */
-        $this->_square = $customSquare + $this->_square;
+        $this->square = $customSquare + $this->square;
 
         /**
          * Sort square position
          */
-        ksort($this->_square);
+        ksort($this->square);
 
-        $this->_randomNumberGenerator = $randomNumberGenerator;
+        $this->randomNumberGenerator = $randomNumberGenerator;
     }
 
     public function roll()
     {
-        return $this->_randomNumberGenerator->randomize();
+        return $this->randomNumberGenerator->randomize();
     }
 
     public function maxRollNumber()
     {
-        return $this->_randomNumberGenerator->maxnumber();
+        return $this->randomNumberGenerator->maxnumber();
     }
 
     public function getBoardSize()
@@ -59,9 +59,10 @@ class Board
 
     public function movePlayer($player, $step)
     {
-        $squareValue = (isset($this->_square[$step])) ? $this->_square[$step] : $step;
+        $step        = $step + $player->position();
+        $squareValue = (isset($this->square[$step])) ? $this->square[$step] : $step;
         $step        = ($step !== $squareValue) ? $squareValue : $step;
-        if (self::maxBoard >= $player->_boardPosition) {
+        if (self::maxBoard >= $player->position()) {
             $player->setPosition($squareValue);
         }
     }
