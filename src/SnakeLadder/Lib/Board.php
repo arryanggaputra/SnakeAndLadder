@@ -9,9 +9,11 @@ class Board
 {
     protected $_square;
 
+    protected $randomNumberGenerator;
+
     const maxBoard = 100;
 
-    public function __construct(array $customSquare)
+    public function __construct(array $customSquare, RandomNumberGenerator $RandomNumberGenerator)
     {
         /**
          * identify square number
@@ -36,9 +38,9 @@ class Board
         ksort($this->_square);
     }
 
-    public static function roll()
+    public function roll()
     {
-        return rand(1, 6);
+        return $this->randomNumberGenerator->randomize();
     }
 
     public function getBoardSize()

@@ -21,7 +21,8 @@ $theSnakeLadder = [
     99 => 78,
 ];
 
-$board   = new SnakeLadder\Lib\Board($theSnakeLadder);
+$dice = new SnakeLadder\Lib\Dice();
+$board   = new SnakeLadder\Lib\Board($theSnakeLadder, $dice);
 $player = new SnakeLadder\Lib\Player(1, $board);
 
 while ($player->getPosition() <= $board->getBoardSize()) {
