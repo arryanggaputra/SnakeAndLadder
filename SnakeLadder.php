@@ -24,7 +24,7 @@ $theSnakeLadder = [
 $dice    = new SnakeLadder\Lib\Dice();
 // $spinner = new SnakeLadder\Lib\Spinner();
 $board   = new SnakeLadder\Lib\Board($theSnakeLadder, $dice);
-$player  = new SnakeLadder\Lib\Player(1, $board);
+$player  = new SnakeLadder\Lib\Player(1);
 
 while ($player->position() <= $board->getBoardSize()) {
     echo "<li>";
