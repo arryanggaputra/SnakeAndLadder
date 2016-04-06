@@ -2,12 +2,10 @@
 
 namespace SnakeLadder\Lib;
 
-use SnakeLadder\Lib\Dice;
-
 /**
  *
  */
-class Board extends Dice
+class Board
 {
     protected $_square;
 
@@ -36,6 +34,11 @@ class Board extends Dice
          * Sort square position
          */
         ksort($this->_square);
+    }
+
+    public static function roll()
+    {
+        return rand(1, 6);
     }
 
     public function getBoardSize()
