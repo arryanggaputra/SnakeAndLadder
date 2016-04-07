@@ -13,6 +13,10 @@ class Board
 
     protected $randomNumberGenerator;
 
+    protected $numberOfParticipant;
+
+    protected $finish = false;
+
     const maxBoard = 100;
 
     public function __construct(array $customSquare, RandomNumberGenerator $randomNumberGenerator)
@@ -40,6 +44,12 @@ class Board
         ksort($this->square);
 
         $this->randomNumberGenerator = $randomNumberGenerator;
+        $this->numberOfParticipant   = $numberOfParticipant;
+    }
+
+    public function finished()
+    {
+        return $this->finish;
     }
 
     public function roll()
@@ -57,17 +67,21 @@ class Board
         return self::maxBoard;
     }
 
-    public function movePlayer($player, $step)
+    public function movePlayer($player)
     {
-        $step   = $step + $player->position();
-        $status = 'neutral';
-        if (isset($this->square[$step]) && $this->square[$step] !== $step) {
-            $status = ($this->square[$step] < $step) ? 'snake' : 'ladder';
-            $step   = $this->square[$step];
+        for ($i = 0; $i < $player->numberOfParticipant(); $i++) {
+            $step = $this->roll();
+            $step = $step + $player->position($i);
+            if (isset($this->square[$step]) && $this->square[$step] !== $step) {
+                $step = $this->square[$step];
+            }
+            if (self::maxBoard >= $player->position($i)) {
+                $player->setPosition($i, $step);
+                $player->renderPosition($i);
+            }
+            if (!$this->finish) {
+                $this->finish = (self::maxBoard <= $player->position($i)) ? true : false;
+            }
         }
-        if (self::maxBoard >= $player->position()) {
-            $player->setPosition($step);
-        }
-        return $status;
     }
 }

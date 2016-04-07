@@ -11,27 +11,40 @@ class Player
 {
     public $name;
 
-    protected $boardPosition;
+    protected $participants = [];
 
-    public function __construct($id)
+    public function add($name)
     {
-        $this->name           = 'Player ' . $id;
-        $this->boardPosition = 0;
+        $this->participants[]['name'] = $name;
     }
 
-    public function setPosition($position)
+    public function name($idPlayer)
     {
-        $this->boardPosition = $position;
+        return $this->participants[$idPlayer]['name'];
     }
 
-    public function showPosition()
+    public function numberOfParticipant()
     {
-        echo $this->name . ' in ' . $this->boardPosition;
+        return sizeof($this->participants);
     }
 
-    public function position()
+    public function setPosition($idPlayer, $position)
     {
-        return $this->boardPosition;
+        $this->participants[$idPlayer]['board_position'] = $position;
+    }
+
+    public function renderPosition($idPlayer)
+    {
+        echo sprintf("<div class='%s'> <b>%s</b> in %s</div>",
+                $this->participants[$idPlayer]['name'],
+                $this->participants[$idPlayer]['name'],
+                $this->participants[$idPlayer]['board_position']
+        );
+    }
+
+    public function position($idPlayer)
+    {
+        return $this->participants[$idPlayer]['board_position'];
     }
 
 }

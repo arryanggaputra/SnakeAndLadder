@@ -21,38 +21,15 @@ $theSnakeLadder = [
     99 => 78,
 ];
 
+$player = new SnakeLadder\Lib\Player;
+$player->add('Engis');
+$player->add('Juna');
 $dice = new SnakeLadder\Lib\Dice();
-// $spinner = new SnakeLadder\Lib\Spinner();
 $board  = new SnakeLadder\Lib\Board($theSnakeLadder, $dice);
-$player = new SnakeLadder\Lib\Player(1);
-$image  = [
-    'neutral' => 'http://icons.iconarchive.com/icons/icojam/blueberry-basic/32/check-icon.png',
-    'snake'   => 'http://www.freeiconsweb.com/Freeicons/Glass_animals_ICON/Snake.png',
-    'ladder'  => 'http://cdn-img.easyicon.net/png/5432/543288.gif',
-];
-while ($player->position() <= $board->getBoardSize()) {
-    echo "<li>";
-
-    /**
-     * Roll the dice on Board
-     */
-    $step = $board->roll();
-
-    /**
-     * roll the dice again
-     */
-    if ($step == $board->maxRollNumber()) {
-        $step += $board->roll();
-    }
-
-    $player->showPosition();
-    echo " - Dice : " . $step;
-
+while (!$board->finished()) {
     /**
      * Move player to the board
      * and get the result
      */
-    $status        = $board->movePlayer($player, $step);
-    echo '<img src="'.$image[$status].'" width="20px"><br/>';
-    echo "</li>";
+    $board->movePlayer($player);
 }
